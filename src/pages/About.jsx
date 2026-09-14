@@ -20,8 +20,8 @@ export default function About() {
           {/* left: statement */}
           <div className="flex flex-col gap-8 md:justify-between">
             <div className="flex flex-col gap-6">
-              <h1 className="text-[16px] font-semibold tracking-[0.02em]">About</h1>
-              <p className="max-w-[520px] text-[14px] leading-[1.6] tracking-[-0.01em] text-black">
+              <h1 className="text-[18px] font-semibold tracking-[0.02em]">About</h1>
+              <p className="max-w-[520px] text-[16px] leading-[1.55] tracking-[-0.01em] text-black">
                 {cv.statement}
               </p>
             </div>
