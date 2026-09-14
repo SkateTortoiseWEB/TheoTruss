@@ -167,7 +167,7 @@ export const getProject = (id) => projects.find((p) => p.id === id);
 
 export const cv = {
   statement:
-    "I am an architecture student in Cambridge, available now for a Part 1 placement.",
+    "Theo Truss is a Part I Architecture graduate from the University of Cambridge",
   education: [
     { title: "Architecture (BA)", place: "University of Cambridge", years: "2023–2026" },
   ],
