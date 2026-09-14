@@ -64,7 +64,7 @@ export default function Contact() {
             <h1 className="text-[13px] font-semibold lowercase tracking-[0.02em]">
               contact
             </h1>
-            <p className="max-w-[360px] text-[14px] leading-[1.6] tracking-[-0.01em] text-black">seeking a part 1 placement for 2026. 
+            <p className="max-w-[360px] text-[14px] leading-[1.6] tracking-[-0.01em] text-black"> 
 
 
 
