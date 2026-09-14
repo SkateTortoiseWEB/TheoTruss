@@ -21,7 +21,7 @@ export default function SiteNav() {
                 key={item.to}
                 to={item.to}
                 className={
-                  "text-[11px] uppercase tracking-[0.14em] lowercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2 " +
+                  "text-[14px] lowercase tracking-[0.14em] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2 " +
                   (active ? "text-black" : "text-black/50 hover:text-black")
                 }
               >
