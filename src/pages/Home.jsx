@@ -5,7 +5,7 @@ import { Image } from "@/components/ui/image";
 export default function Home() {
   return (
     <section aria-label="project index" className="w-full">
-      <div className="columns-1 gap-3 px-6 py-8 sm:columns-2 md:columns-3 md:px-12 md:py-12 lg:columns-4">
+      <div className="columns-1 gap-3 px-6 pb-8 pt-4 sm:columns-2 md:columns-3 md:px-12 md:pb-12 md:pt-6 lg:columns-4">
         {projects.map((p, i) => {
           const d = getDims(p.cover);
           return (
