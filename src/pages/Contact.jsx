@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { useRef, useState } from "react";
 import { cv } from "@/data/projects";
+
+// Web3Forms access key. This is public by design — it is an alias for the
+// recipient inbox, not a secret. Get one at https://web3forms.com
+const WEB3FORMS_KEY = "bc728dff-9d4e-4efe-92e3-24a903d77b52";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", firm: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [error, setError] = useState("");
+  const botcheck = useRef(null);
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -14,14 +18,29 @@ export default function Contact() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!valid || status === "sending") return;
+    if (botcheck.current?.checked) return; // honeypot tripped: silently drop
     setStatus("sending");
     setError("");
     try {
-      await base44.integrations.Core.SendEmail({
-        to: cv.email,
-        subject: `portfolio enquiry — ${form.name}${form.firm ? ` / ${form.firm}` : ""}`,
-        text: `name: ${form.name}\nfirm: ${form.firm || "—"}\nemail: ${form.email}\n\n${form.message}`
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          from_name: "theo truss — portfolio",
+          subject: `portfolio enquiry — ${form.name}${form.firm ? ` / ${form.firm}` : ""}`,
+          name: form.name,
+          firm: form.firm || "—",
+          email: form.email,
+          message: form.message,
+          botcheck: ""
+        })
       });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || "send failed");
       setStatus("sent");
       setForm({ name: "", firm: "", email: "", message: "" });
     } catch (err) {
@@ -76,6 +95,16 @@ export default function Contact() {
               </div> :
 
             <form onSubmit={onSubmit} className="flex flex-col gap-8" noValidate>
+                {/* honeypot: hidden from people, filled in by bots */}
+                <input
+                type="checkbox"
+                name="botcheck"
+                ref={botcheck}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ display: "none" }} />
+
                 <div className="grid grid-cols-2 gap-x-6 gap-y-8">
                   {fields.map((f) =>
                 <div key={f.key} className={f.full ? "col-span-2" : "col-span-1"}>
