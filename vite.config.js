@@ -14,7 +14,7 @@ export default defineConfig({
       analyticsTracker: true,
       visualEditAgent: true
     }),
-    base: '/TheoTruss/',
     react(),
-  ]
+  ],
+  base: '/TheoTruss/',
 });
