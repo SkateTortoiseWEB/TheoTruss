@@ -57,6 +57,15 @@ export default function About() {
               ))}
             </Section>
 
+            <Section label="awards">
+              {cv.awards.map((a, i) => (
+                <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
+                  <span className="text-black">{a.title}</span>
+                  <span className="shrink-0 text-right text-black/50">{a.years}</span>
+                </div>
+              ))}
+            </Section>
+
             <Section label="skills">
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-[13px] lowercase tracking-[-0.01em] text-black">
                 {cv.skills.map((s, i) => (

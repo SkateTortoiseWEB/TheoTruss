@@ -52,7 +52,7 @@ export const projects = [
   {
     id: "accretion",
     title: "Accretion",
-    year: "2025–2026",
+    year: "2023–2026",
     location: "margate, kent",
     typology: "assisted living / educational",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/d1d96c96d_Theo_Truss_Portfoliopdf-image-001.jpg",
@@ -79,7 +79,7 @@ export const projects = [
   {
     id: "artefacts",
     title: "Artefacts",
-    year: "2024–2025",
+    year: "2023–2026",
     location: "the fitzwilliam museum, cambridge",
     typology: "museum masterplan",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/cc0e8e937_Theo_Truss_Portfolio_pdf-image-014.jpg",
@@ -107,7 +107,7 @@ export const projects = [
   {
     id: "reflection",
     title: "Reflection",
-    year: "2025",
+    year: "2023–2026",
     location: "history faculty building, cambridge",
     typology: "multi-faith reflection space",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/31ea24725_Theo_Truss_Portfolio_pdf-image-025.jpg",
@@ -123,7 +123,7 @@ export const projects = [
   {
     id: "novigo",
     title: "Novigo",
-    year: "2024–",
+    year: "2023–2026",
     location: "cambridge",
     typology: "design and furniture studio",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/742770144_Theo_Truss_Portfolio_pdf-image-027.jpg",
@@ -145,7 +145,7 @@ export const projects = [
   {
     id: "a-stage-backstage",
     title: "A Stage, Backstage",
-    year: "2023",
+    year: "2023–2026",
     location: "mill road, cambridge",
     typology: "theatre",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/0b77a2ea1_Theo_Truss_Portfolio_pdf-image-041.jpg",
@@ -167,12 +167,15 @@ export const getProject = (id) => projects.find((p) => p.id === id);
 
 export const cv = {
   statement:
-    "Theo Truss is a Part I Architecture graduate from the University of Cambridge",
+    "I am an architecture student in Cambridge, available now for a Part 1 placement.",
   education: [
     { title: "Architecture (BA)", place: "University of Cambridge", years: "2023–2026" },
   ],
   experience: [
     { role: "Co-founder", place: "Novigo — design and furniture studio", years: "Cambridge" },
+  ],
+  awards: [
+    { title: "Gilbert Laurie Cadell Prize for Architecture", years: "2026" },
   ],
   skills: [
     "carpentry",
@@ -182,5 +185,5 @@ export const cv = {
     "material reuse",
     "traditional joinery",
   ],
-  email: "theotruss@icloud.com",
+  email: "theo.truss@example.com",
 };
