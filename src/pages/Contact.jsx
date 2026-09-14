@@ -52,26 +52,24 @@ export default function Contact() {
   const fields = [
   { key: "name", label: "name", type: "text", required: true, full: false },
   { key: "firm", label: "firm", type: "text", required: false, full: false },
-  { key: "email", label: "email", type: "email", required: true, full: false }];
+  { key: "email", label: "email", type: "email", required: true, full: true }];
 
 
   return (
     <section className="w-full">
       <div className="px-6 py-10 md:px-12 md:py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_400px] md:gap-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,420px)_400px] md:gap-24">
           {/* left: statement */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             <h1 className="text-[13px] font-semibold lowercase tracking-[0.02em]">
               contact
             </h1>
-            <p className="max-w-[360px] text-[14px] leading-[1.6] tracking-[-0.01em] text-black"> 
-
-
-
+            <p className="max-w-[420px] text-[14px] leading-[1.6] tracking-[-0.01em] text-black">
+              seeking a part 1 placement for 2026.
             </p>
             <div className="flex flex-col gap-1 text-[11px] lowercase tracking-[0.04em] text-black/60">
               <span>theo truss</span>
-              <span>Shrewsbury, uk</span>
+              <span>shrewsbury, uk</span>
               <a
                 href={`mailto:${cv.email}`}
                 className="underline underline-offset-2 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2">
