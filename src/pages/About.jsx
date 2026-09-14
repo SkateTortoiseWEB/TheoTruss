@@ -41,7 +41,7 @@ export default function About() {
           <div className="flex w-full max-w-[400px] flex-col gap-10">
             <Section label="education">
               {cv.education.map((e, i) => (
-                <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] lowercase tracking-[-0.01em]">
+                <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
                   <span className="text-black">{e.title}</span>
                   <span className="text-right text-black/50">{e.place} — {e.years}</span>
                 </div>
@@ -50,7 +50,7 @@ export default function About() {
 
             <Section label="experience">
               {cv.experience.map((e, i) => (
-                <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] lowercase tracking-[-0.01em]">
+                <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
                   <span className="text-black">{e.role}</span>
                   <span className="text-right text-black/50">{e.place} — {e.years}</span>
                 </div>
