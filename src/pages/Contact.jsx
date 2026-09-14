@@ -64,7 +64,7 @@ export default function Contact() {
             <div className="flex flex-col gap-6">
               <h1 className="text-[18px] font-semibold tracking-[0.02em]">Contact</h1>
               <p className="max-w-[520px] text-[16px] leading-[1.55] tracking-[-0.01em] text-black">
-                seeking a part 1 placement for 2026.
+                
               </p>
             </div>
             <div className="flex flex-col gap-1 text-[11px] lowercase tracking-[0.04em] text-black/60">
