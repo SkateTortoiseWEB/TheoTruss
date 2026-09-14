@@ -49,13 +49,11 @@ const AuthenticatedApp = () => {
   );
 };
 
-
 function App() {
-
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        <Router>
+        <Router basename="/TheoTruss">
           <ScrollToTop />
           <AuthenticatedApp />
         </Router>
