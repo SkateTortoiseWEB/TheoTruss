@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import Logo from "@/components/Logo";
 
 const nav = [
-  { label: "index", to: "/" },
+  { label: "gallery", to: "/" },
   { label: "about", to: "/about" },
   { label: "contact", to: "/contact" },
 ];

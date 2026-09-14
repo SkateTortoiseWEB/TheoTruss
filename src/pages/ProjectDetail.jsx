@@ -20,7 +20,7 @@ export default function ProjectDetail() {
         <p className="text-[11px] lowercase tracking-[0.04em] text-black/60">
           project not found.{" "}
           <Link to="/" className="underline underline-offset-2">
-            return to index
+            return to gallery
           </Link>
         </p>
       </div>
