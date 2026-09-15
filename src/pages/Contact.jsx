@@ -6,7 +6,7 @@ import { cv } from "@/data/projects";
 const WEB3FORMS_KEY = "bc728dff-9d4e-4efe-92e3-24a903d77b52";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", firm: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [error, setError] = useState("");
   const botcheck = useRef(null);
@@ -31,9 +31,9 @@ export default function Contact() {
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
           from_name: "theo truss — portfolio",
-          subject: `portfolio enquiry — ${form.name}${form.firm ? ` / ${form.firm}` : ""}`,
+          subject: `portfolio enquiry — ${form.name}${form.company ? ` / ${form.company}` : ""}`,
           name: form.name,
-          firm: form.firm || "—",
+          company: form.company || "—",
           email: form.email,
           message: form.message,
           botcheck: ""
@@ -42,7 +42,7 @@ export default function Contact() {
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || "send failed");
       setStatus("sent");
-      setForm({ name: "", firm: "", email: "", message: "" });
+      setForm({ name: "", company: "", email: "", message: "" });
     } catch (err) {
       setStatus("error");
       setError("message could not be sent. please email theo directly.");
@@ -51,7 +51,7 @@ export default function Contact() {
 
   const fields = [
   { key: "name", label: "name", type: "text", required: true, full: false },
-  { key: "firm", label: "firm", type: "text", required: false, full: false },
+  { key: "company", label: "company", type: "text", required: false, full: false },
   { key: "email", label: "email", type: "email", required: true, full: true }];
 
 

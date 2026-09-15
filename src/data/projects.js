@@ -12,7 +12,6 @@ const imageDims = {
   "6a2dc77b2_Theo_Truss_Portfoliopdf-image-007.jpg": [3452, 2443],
   "ec9346ec0_Theo_Truss_Portfoliopdf-image-008.jpg": [3218, 2172],
   "26ad15e1b_Theo_Truss_Portfoliopdf-image-009.jpg": [1245, 1760],
-  "46a673846_Theo_Truss_Portfoliopdf-image-010.jpg": [501, 1607],
   "d338db04b_Theo_Truss_Portfoliopdf-image-011.jpg": [675, 309],
   "cc0e8e937_Theo_Truss_Portfolio_pdf-image-014.jpg": [879, 1605],
   "23c5a2083_Theo_Truss_Portfolio_pdf-image-015.jpg": [725, 349],
@@ -48,11 +47,36 @@ export const getDims = (url) => {
   return d ? { w: d[0], h: d[1] } : null;
 };
 
+// Quarter/half turns applied at render time. The source files came out of the
+// portfolio PDF on their side; the CDN has no rotate transform, so the fix is
+// a CSS transform in PlateImage. Positive = clockwise.
+const imageRotation = {
+  "6a2dc77b2_Theo_Truss_Portfoliopdf-image-007.jpg": -90,
+  "ec9346ec0_Theo_Truss_Portfoliopdf-image-008.jpg": -90,
+  "23c5a2083_Theo_Truss_Portfolio_pdf-image-015.jpg": 180,
+  "96938d58c_Theo_Truss_Portfolio_pdf-image-023.jpg": -90,
+  "2d6d1ef25_Theo_Truss_Portfolio_pdf-image-044.jpg": 90,
+  "163ec5a0b_Theo_Truss_Portfolio_pdf-image-045.jpg": 90,
+  "57b40d9d0_Theo_Truss_Portfolio_pdf-image-046.jpg": 90,
+};
+
+// Rotation in degrees for an image url: 0, 90, -90 or 180.
+export const getRotation = (url) => imageRotation[url.split("/").pop()] ?? 0;
+
+// Dimensions of the image as it appears on screen. A quarter turn swaps the
+// axes, so layout (aspect ratios, max-widths) must use these, not getDims.
+export const getDisplayDims = (url) => {
+  const d = getDims(url);
+  if (!d) return null;
+  const r = getRotation(url);
+  return r === 90 || r === -90 ? { w: d.h, h: d.w } : d;
+};
+
 export const projects = [
   {
     id: "accretion",
     title: "Accretion",
-    year: "2023–2026",
+    year: "2025–2026",
     location: "margate, kent",
     typology: "assisted living / educational",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/d1d96c96d_Theo_Truss_Portfoliopdf-image-001.jpg",
@@ -65,7 +89,6 @@ export const projects = [
       "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/6a2dc77b2_Theo_Truss_Portfoliopdf-image-007.jpg",
       "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/ec9346ec0_Theo_Truss_Portfoliopdf-image-008.jpg",
       "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/26ad15e1b_Theo_Truss_Portfoliopdf-image-009.jpg",
-      "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/46a673846_Theo_Truss_Portfoliopdf-image-010.jpg",
       "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/d338db04b_Theo_Truss_Portfoliopdf-image-011.jpg",
     ],
     body: [
@@ -79,7 +102,7 @@ export const projects = [
   {
     id: "artefacts",
     title: "Artefacts",
-    year: "2023–2026",
+    year: "2024–2025",
     location: "the fitzwilliam museum, cambridge",
     typology: "museum masterplan",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/cc0e8e937_Theo_Truss_Portfolio_pdf-image-014.jpg",
@@ -107,7 +130,7 @@ export const projects = [
   {
     id: "reflection",
     title: "Reflection",
-    year: "2023–2026",
+    year: "2025",
     location: "history faculty building, cambridge",
     typology: "multi-faith reflection space",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/31ea24725_Theo_Truss_Portfolio_pdf-image-025.jpg",
@@ -123,7 +146,7 @@ export const projects = [
   {
     id: "novigo",
     title: "Novigo",
-    year: "2023–2026",
+    year: "2024–ongoing",
     location: "cambridge",
     typology: "design and furniture studio",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/742770144_Theo_Truss_Portfolio_pdf-image-027.jpg",
@@ -145,7 +168,7 @@ export const projects = [
   {
     id: "a-stage-backstage",
     title: "A Stage, Backstage",
-    year: "2023–2026",
+    year: "2023",
     location: "mill road, cambridge",
     typology: "theatre",
     cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/0b77a2ea1_Theo_Truss_Portfolio_pdf-image-041.jpg",
@@ -185,5 +208,5 @@ export const cv = {
     "material reuse",
     "traditional joinery",
   ],
-  email: "theo.truss@example.com",
+  email: "theotruss@icloud.com",
 };

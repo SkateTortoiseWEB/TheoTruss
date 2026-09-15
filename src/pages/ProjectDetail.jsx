@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProject, projects, getDims } from "@/data/projects";
-import { Image } from "@/components/ui/image";
+import { getProject, projects, getDisplayDims } from "@/data/projects";
+import PlateImage from "@/components/PlateImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProjectDetail() {
@@ -31,11 +31,11 @@ export default function ProjectDetail() {
   const next = projects[(index + 1) % projects.length];
 
   const main = project.images[0];
-  const mainDims = getDims(main);
+  const mainDims = getDisplayDims(main);
   const rest = project.images.slice(1);
   const safeSlide = rest.length === 0 ? 0 : Math.min(slide, rest.length - 1);
   const current = rest[safeSlide];
-  const currentDims = current ? getDims(current) : null;
+  const currentDims = current ? getDisplayDims(current) : null;
 
   return (
     <article className="w-full">
@@ -63,13 +63,9 @@ export default function ProjectDetail() {
                 className="mx-auto w-full"
                 style={mainDims ? { maxWidth: `${mainDims.w}px` } : undefined}
               >
-                <Image
+                <PlateImage
                   src={main}
                   alt={`${project.title} — plate 1`}
-                  fittingType="fill"
-                  originWidth={mainDims?.w}
-                  originHeight={mainDims?.h}
-                  className="w-full"
                 />
               </div>
             </div>
@@ -81,13 +77,9 @@ export default function ProjectDetail() {
                   className="group relative mx-auto w-full"
                   style={currentDims ? { maxWidth: `${currentDims.w}px` } : undefined}
                 >
-                  <Image
+                  <PlateImage
                     src={current}
                     alt={`${project.title} — plate ${safeSlide + 2}`}
-                    fittingType="fill"
-                    originWidth={currentDims?.w}
-                    originHeight={currentDims?.h}
-                    className="w-full"
                   />
                   {rest.length > 1 && (
                     <>
