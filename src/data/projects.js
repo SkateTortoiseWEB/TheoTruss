@@ -190,7 +190,7 @@ export const getProject = (id) => projects.find((p) => p.id === id);
 
 export const cv = {
   statement:
-    "Theo Truss is a Part I Architecture graduate from the University of Cambridge",
+    "Theo Truss is a Part I Architecture graduate from the University of Cambridge, with interests in memory, place and stewardship. His most recent research conducted fieldwork in spaces of contested memory in former Yugoslavian states.",
   education: [
     { title: "Architecture (BA)", place: "University of Cambridge", years: "2023–2026" },
   ],
