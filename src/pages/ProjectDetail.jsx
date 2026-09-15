@@ -134,17 +134,17 @@ export default function ProjectDetail() {
                           setSlide((s) => (s - 1 + rest.length) % rest.length)
                         }
                         aria-label="previous image"
-                        className="absolute left-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 text-black opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] md:opacity-0 md:group-hover:opacity-100"
+                        className="absolute left-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
                       >
-                        <ChevronLeft className="h-4 w-4" />
+                        <ChevronLeft className="h-5 w-5" />
                       </button>
                       <button
                         type="button"
                         onClick={() => setSlide((s) => (s + 1) % rest.length)}
                         aria-label="next image"
-                        className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 text-black opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] md:opacity-0 md:group-hover:opacity-100"
+                        className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
                       >
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="h-5 w-5" />
                       </button>
                     </>
                   )}
