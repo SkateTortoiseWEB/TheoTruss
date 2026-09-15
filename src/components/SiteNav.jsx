@@ -3,8 +3,8 @@ import Logo from "@/components/Logo";
 
 const nav = [
   { label: "gallery", to: "/" },
-  { label: "about", to: "/about" },
-  { label: "contact", to: "/contact" },
+  { label: "about", to: "/about/" },
+  { label: "contact", to: "/contact/" },
 ];
 
 export default function SiteNav() {
@@ -15,7 +15,10 @@ export default function SiteNav() {
         <Logo />
         <nav className="flex items-center gap-5" aria-label="primary">
           {nav.map((item) => {
-            const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
+            // Compare without trailing slashes so /about and /about/ both count.
+            const here = pathname.replace(/\/+$/, "") || "/";
+            const target = item.to.replace(/\/+$/, "") || "/";
+            const active = target === "/" ? here === "/" : here.startsWith(target);
             return (
               <Link
                 key={item.to}

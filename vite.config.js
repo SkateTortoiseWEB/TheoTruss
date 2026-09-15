@@ -11,5 +11,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: './',
+  // Served from the root of theotruss.com. Must be absolute (not './') now that
+  // pages live at nested addresses like /project/accretion/.
+  base: '/',
 })

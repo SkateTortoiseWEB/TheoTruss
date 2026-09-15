@@ -1,7 +1,7 @@
 import { getDims, getRotation } from "@/data/projects";
 
 // Images live in public/images/projects and are referenced without a leading
-// slash, so BASE_URL keeps them working under a GitHub Pages sub-path.
+// slash; BASE_URL ("/") turns them into absolute paths that work on every page.
 const resolve = (src) =>
   /^(https?:)?\/\//.test(src) ? src : import.meta.env.BASE_URL + src.replace(/^\//, "");
 

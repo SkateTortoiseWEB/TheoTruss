@@ -50,7 +50,7 @@ export default function ProjectDetail() {
   if (!project) {
     return (
       <div className="px-6 py-24 md:px-12">
-        <p className="text-[11px] lowercase tracking-[0.04em] text-black/60">
+        <p className="text-[12px] lowercase tracking-[0.04em] text-black/60">
           project not found.{" "}
           <Link to="/" className="underline underline-offset-2">
             return to gallery
@@ -83,10 +83,10 @@ export default function ProjectDetail() {
     <article className="w-full">
       {/* meta line */}
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-6 py-4 md:px-12">
-        <h1 className="text-[13px] font-semibold tracking-[0.02em]">
+        <h1 className="text-[15px] font-semibold tracking-[0.02em]">
           {project.title}
         </h1>
-        <div className="flex flex-wrap gap-x-6 gap-y-1 text-[11px] lowercase tracking-[0.04em] text-black/60">
+        <div className="flex flex-wrap gap-x-6 gap-y-1 text-[12px] lowercase tracking-[0.04em] text-black/60">
           <span>{project.typology}</span>
           <span>{project.location}</span>
           <span>{project.year}</span>
@@ -150,7 +150,7 @@ export default function ProjectDetail() {
                   )}
                 </div>
                 {rest.length > 1 && (
-                  <div className="mt-2 text-center text-[10px] lowercase tracking-[0.1em] text-black/40">
+                  <div className="mt-2 text-center text-[11px] lowercase tracking-[0.1em] text-black/40">
                     {safeSlide + 1} / {rest.length}
                   </div>
                 )}
@@ -161,13 +161,13 @@ export default function ProjectDetail() {
 
         {/* right: text */}
         <div className="md:w-1/2">
-          <div className="px-6 py-10 md:mx-auto md:max-w-[400px] md:px-0 md:py-16">
-            <div className="mb-8 flex items-baseline gap-3 text-[11px] lowercase tracking-[0.06em] text-black/50">
+          <div className="px-6 py-10 md:mx-auto md:max-w-[440px] md:px-0 md:py-16">
+            <div className="mb-8 flex items-baseline gap-3 text-[12px] lowercase tracking-[0.06em] text-black/50">
               <span>{String(index + 1).padStart(2, "0")}</span>
               <span className="h-px flex-1 bg-black/20" aria-hidden="true" />
               <span>{project.year}</span>
             </div>
-            <div className="flex flex-col gap-5 text-[14px] leading-[1.6] tracking-[-0.01em] text-black">
+            <div className="flex flex-col gap-5 text-[16px] leading-[1.6] tracking-[-0.01em] text-black">
               {project.body.map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -175,8 +175,8 @@ export default function ProjectDetail() {
 
             <div className="mt-10 border-t border-black pt-4">
               <Link
-                to={`/project/${next.id}`}
-                className="inline-flex items-baseline gap-2 text-[11px] tracking-[0.06em] text-black/60 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2"
+                to={`/project/${next.id}/`}
+                className="inline-flex items-baseline gap-2 text-[12px] tracking-[0.06em] text-black/60 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2"
               >
                 <span>next</span>
                 <span className="h-px w-6 bg-black/40" aria-hidden="true" />

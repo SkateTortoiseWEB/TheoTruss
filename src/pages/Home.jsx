@@ -11,7 +11,7 @@ export default function Home() {
           return (
             <Link
               key={p.id}
-              to={`/project/${p.id}`}
+              to={`/project/${p.id}/`}
               aria-label={`open project: ${p.title}`}
               className="group relative mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden bg-black/5 transition-opacity duration-200 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FF0000]"
             >
