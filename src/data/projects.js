@@ -126,9 +126,9 @@ export const projects = [
     year: "2025–2026",
     location: "history faculty building, cambridge",
     typology: "multi-faith reflection space",
-    cover: "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/31ea24725_Theo_Truss_Portfolio_pdf-image-025.jpg",
+    cover: "https://previews.dropbox.com/p/thumb/ADLvC3cQzmFxTnUuohU93yWmhBSU7Kq11cXV00E9Zs01X__uk0VguKc730T7hu7aZDXirFCPqAPsTSo1nacUY_pnuYeTnGtV7UkxUhHVXqiA8erDhRSS98Wh5uL_dLwSWkS66boqajUiiprJUVeTL5MfcC9OsL5R5GYiKh6zLwkQLeeEsWht9RYBDk1bis2waRcnT2gWKsh_BwstVThW3KGdlF0m-TXC038YmXJOsvewIFxZjjHDODiJNzcaAsYfue9KFgArBi00cpmqKLsRnBqLGAuBtMjD9ZBbIhmpW9mssc9ukSNIifzZ0hDAavRy7oLWVb4oa0Hw10cH6njFYuUs/p.jpeg?is_prewarmed=true",
     images: [
-      "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/31ea24725_Theo_Truss_Portfolio_pdf-image-025.jpg",
+      "https://previews.dropbox.com/p/thumb/ADLvC3cQzmFxTnUuohU93yWmhBSU7Kq11cXV00E9Zs01X__uk0VguKc730T7hu7aZDXirFCPqAPsTSo1nacUY_pnuYeTnGtV7UkxUhHVXqiA8erDhRSS98Wh5uL_dLwSWkS66boqajUiiprJUVeTL5MfcC9OsL5R5GYiKh6zLwkQLeeEsWht9RYBDk1bis2waRcnT2gWKsh_BwstVThW3KGdlF0m-TXC038YmXJOsvewIFxZjjHDODiJNzcaAsYfue9KFgArBi00cpmqKLsRnBqLGAuBtMjD9ZBbIhmpW9mssc9ukSNIifzZ0hDAavRy7oLWVb4oa0Hw10cH6njFYuUs/p.jpeg?is_prewarmed=true",
       "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/b030f4188_Theo_Truss_Portfolio_pdf-image-026.jpg",
     ],
     body: [
