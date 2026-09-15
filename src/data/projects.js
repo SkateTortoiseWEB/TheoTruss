@@ -121,22 +121,6 @@ export const projects = [
     ],
   },
   {
-    id: "Dissertation",
-    title: "Dissertation",
-    year: "2025–2026",
-    location: "history faculty building, cambridge",
-    typology: "multi-faith reflection space",
-    cover: "https://previews.dropbox.com/p/thumb/ADLvC3cQzmFxTnUuohU93yWmhBSU7Kq11cXV00E9Zs01X__uk0VguKc730T7hu7aZDXirFCPqAPsTSo1nacUY_pnuYeTnGtV7UkxUhHVXqiA8erDhRSS98Wh5uL_dLwSWkS66boqajUiiprJUVeTL5MfcC9OsL5R5GYiKh6zLwkQLeeEsWht9RYBDk1bis2waRcnT2gWKsh_BwstVThW3KGdlF0m-TXC038YmXJOsvewIFxZjjHDODiJNzcaAsYfue9KFgArBi00cpmqKLsRnBqLGAuBtMjD9ZBbIhmpW9mssc9ukSNIifzZ0hDAavRy7oLWVb4oa0Hw10cH6njFYuUs/p.jpeg?is_prewarmed=true",
-    images: [
-      "https://previews.dropbox.com/p/thumb/ADLvC3cQzmFxTnUuohU93yWmhBSU7Kq11cXV00E9Zs01X__uk0VguKc730T7hu7aZDXirFCPqAPsTSo1nacUY_pnuYeTnGtV7UkxUhHVXqiA8erDhRSS98Wh5uL_dLwSWkS66boqajUiiprJUVeTL5MfcC9OsL5R5GYiKh6zLwkQLeeEsWht9RYBDk1bis2waRcnT2gWKsh_BwstVThW3KGdlF0m-TXC038YmXJOsvewIFxZjjHDODiJNzcaAsYfue9KFgArBi00cpmqKLsRnBqLGAuBtMjD9ZBbIhmpW9mssc9ukSNIifzZ0hDAavRy7oLWVb4oa0Hw10cH6njFYuUs/p.jpeg?is_prewarmed=true",
-      "https://media.base44.com/images/public/6aa801bf24e97fd8bd96807f/b030f4188_Theo_Truss_Portfolio_pdf-image-026.jpg",
-    ],
-    body: [
-      "The History Faculty building at the University of Cambridge is currently under renovation. The Grade II* listed building, designed by James Stirling in 1968, needs urgent conservation work. The current proposal also looks to integrate the building into the surrounding Sidgewick site. This projects brief called for a fully demountable structure that sat in the corner of the site, providing a new valuable space for the library and surrounding environment. The project presents a multi-faith reflection space, that nestles in the existing ramparts of the Seeley Library.",
-      "A timber framed construction would sit onto a gabion wall system, being tied down in between timber columns. I investigated possibilities of using pinned mortise and tenon as well as other traditional barn building joinery as to support a roof that it topped by a skylight.",
-    ],
-  },
-  {
     id: "novigo",
     title: "Novigo",
     year: "2023–2026",
