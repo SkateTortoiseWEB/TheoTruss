@@ -1,0 +1,138 @@
+# Pages CMS configuration — https://app.pagescms.org
+# Edits made there are saved to this repository and the site redeploys itself.
+
+media:
+  input: public/images/projects
+  output: /images/projects
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: content/projects
+    format: json
+    filename: "{title}.json"
+    view:
+      fields: [title, position, year]
+      primary: title
+      sort: [position, title]
+      default:
+        sort: position
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: Also used for the page address, e.g. "Test Pavilion" becomes theotruss.com/project/test-pavilion. Changing the title later does not change the address.
+      - name: position
+        label: Position on the gallery
+        type: number
+        required: true
+        description: "1 appears first. Existing projects use 1, 2, 3, 4, 5, so use 6 for a new project at the end, or 0 to put it before everything."
+      - name: year
+        label: Year
+        type: string
+        required: true
+        description: "For example: 2026 or 2025–2026"
+      - name: location
+        label: Location
+        type: string
+        description: "Written in lower case on the site, for example: margate, kent"
+      - name: type
+        label: Type of project
+        type: string
+        description: "For example: museum masterplan, theatre, furniture"
+      - name: images
+        label: Images
+        type: object
+        list: true
+        required: true
+        description: The first image is the cover on the gallery page. Drag images to reorder. Any size is fine; they are resized automatically. Use JPG or PNG (not HEIC).
+        fields:
+          - name: image
+            label: Image
+            type: image
+            required: true
+          - name: turn
+            label: Turn this image
+            type: select
+            description: Only needed if the image appears sideways or upside down on the site.
+            default: none
+            options:
+              values:
+                - name: none
+                  label: No turn
+                - name: right
+                  label: Turn right (clockwise)
+                - name: left
+                  label: Turn left (anticlockwise)
+                - name: upside-down
+                  label: Turn upside down
+      - name: description
+        label: Description
+        type: text
+        description: Leave an empty line between paragraphs.
+
+  - name: about
+    label: About and contact
+    type: file
+    path: content/about.json
+    format: json
+    fields:
+      - name: statement
+        label: About text
+        type: text
+        required: true
+      - name: location
+        label: Location
+        type: string
+        description: "Shown under his name on the About and Contact pages, for example: shrewsbury, uk"
+      - name: email
+        label: Email address
+        type: string
+      - name: education
+        label: Education
+        type: object
+        list: true
+        fields:
+          - name: course
+            label: Course
+            type: string
+          - name: place
+            label: University or school
+            type: string
+          - name: years
+            label: Years
+            type: string
+      - name: experience
+        label: Experience
+        type: object
+        list: true
+        fields:
+          - name: role
+            label: Role
+            type: string
+          - name: place
+            label: Organisation
+            type: string
+          - name: years
+            label: Years or place
+            type: string
+      - name: awards
+        label: Awards
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Award
+            type: string
+          - name: year
+            label: Year
+            type: string
+      - name: skills
+        label: Skills
+        type: string
+        list: true

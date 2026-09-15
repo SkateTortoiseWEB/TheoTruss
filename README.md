@@ -1,7 +1,38 @@
 # Theo Truss — portfolio
 
-Static React site: Vite + Tailwind, deployed to GitHub Pages by
-`.github/workflows/deploy.yml` on every push to `main`.
+Static React site (Vite + Tailwind) at https://theotruss.com, deployed to
+GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
+
+## Editing content (no code needed)
+
+Projects and the About page are edited at **https://app.pagescms.org**:
+sign in with GitHub, open this repository, and use **Projects** or
+**About and contact**. Saving commits to `main`, and the site updates about
+two minutes later (progress: the repo's **Actions** tab).
+
+Content lives in plain files:
+
+- `content/projects/<project>.json` — one file per project
+- `content/about.json` — About and Contact details
+- `public/images/projects/` — uploaded images (originals, any size)
+
+Editor fields are defined in `.pages.yml`.
+
+## How the build uses it
+
+`npm run build` (and `npm run dev`) first runs `scripts/prepare-content.mjs`,
+which:
+
+- orients, turns, resizes (max 2000px) and converts every image to WebP in
+  `public/img/`
+- writes `src/data/content.generated.json`, read by `src/data/projects.js`
+
+Both outputs are generated and git-ignored. A missing image or a project with
+no images is skipped with a warning in the build log rather than failing.
+
+`scripts/build-pages.mjs` then writes an HTML file per page (so clean URLs
+like `/project/accretion/` work on GitHub Pages), `404.html` and
+`sitemap.xml`, and leaves the original uploads out of the published site.
 
 ## Run locally
 
@@ -9,29 +40,10 @@ Static React site: Vite + Tailwind, deployed to GitHub Pages by
 npm install
 npm run dev     # http://localhost:5173
 npm run build   # production build into dist/
-npm run preview # serve dist/ locally
 ```
-
-## Content
-
-All copy and project data live in `src/data/projects.js`:
-
-- `projects` — one entry per project (`id`, `title`, `year`, `location`,
-  `typology`, `cover`, `images`, `body`)
-- `cv` — the About page (statement, education, experience, awards, skills, email)
-- `imageDims` / `imageRotation` — natural pixel size and on-screen rotation for
-  each image file, keyed by filename
-
-Images live in `public/images/projects/` and are referenced by relative path
-(`images/projects/<file>`), never with a leading slash — the site is served from
-a sub-path on GitHub Pages, so a leading slash would 404.
-
-To add a project: drop the images in `public/images/projects/`, add their
-dimensions to `imageDims`, and add the project object to `projects`.
 
 ## Notes
 
-- Routing is `HashRouter`, so URLs look like `/#/project/accretion`. That is what
-  makes deep links work on GitHub Pages without a custom 404 fallback.
-- The contact form posts to Web3Forms. The access key in `src/pages/Contact.jsx`
-  is public by design — it identifies the destination inbox, not an account.
+- The contact form posts to Web3Forms. The access key in
+  `src/pages/Contact.jsx` is public by design.
+- Font: Newsreader, self-hosted via `@fontsource-variable/newsreader`.

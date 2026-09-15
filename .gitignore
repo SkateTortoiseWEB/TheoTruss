@@ -29,3 +29,7 @@ dist-ssr
 
 .env
 .vite
+
+# Generated on every build from content/ (see scripts/prepare-content.mjs)
+public/img/
+src/data/content.generated.json

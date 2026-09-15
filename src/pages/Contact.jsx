@@ -69,7 +69,7 @@ export default function Contact() {
             </div>
             <div className="flex flex-col gap-1 text-[11px] lowercase tracking-[0.04em] text-black/60">
               <span>theo truss</span>
-              <span>shrewsbury, uk</span>
+              {cv.location ? <span>{cv.location}</span> : null}
               <a
                 href={`mailto:${cv.email}`}
                 className="underline underline-offset-2 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2">

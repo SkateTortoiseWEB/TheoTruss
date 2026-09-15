@@ -1,0 +1,33 @@
+{
+  "statement": "Theo Truss is a Part I Architecture graduate from the University of Cambridge, with interests in memory, place and stewardship. His most recent research conducted fieldwork in spaces of contested memory in former Yugoslavian states.",
+  "location": "shrewsbury, uk",
+  "email": "theotruss@icloud.com",
+  "education": [
+    {
+      "course": "Architecture (BA)",
+      "place": "University of Cambridge",
+      "years": "2023–2026"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Co-founder",
+      "place": "Novigo — design and furniture studio",
+      "years": "Cambridge"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Gilbert Laurie Cadell Prize for Architecture",
+      "year": "2026"
+    }
+  ],
+  "skills": [
+    "carpentry",
+    "model making",
+    "product design",
+    "architectural design",
+    "material reuse",
+    "traditional joinery"
+  ]
+}

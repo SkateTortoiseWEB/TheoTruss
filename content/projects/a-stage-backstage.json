@@ -1,0 +1,34 @@
+{
+  "title": "A Stage, Backstage",
+  "position": 5,
+  "year": "2023",
+  "location": "mill road, cambridge",
+  "type": "theatre",
+  "images": [
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-041.webp",
+      "turn": "none"
+    },
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-042.webp",
+      "turn": "none"
+    },
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-043.webp",
+      "turn": "none"
+    },
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-044.webp",
+      "turn": "right"
+    },
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-045.webp",
+      "turn": "right"
+    },
+    {
+      "image": "/images/projects/Theo_Truss_Portfolio_pdf-image-046.webp",
+      "turn": "right"
+    }
+  ],
+  "description": "This first-year project proposes a new theatre on Mill Road, a community with a strong sense of identity, that holds firm amongst the changing environment and increased inequality in Cambridge. The design was initially guided by Thornton Wilder’s Our Town, a play which deals with themes of community and loss, and is written with very little set, the stage manager playing a key role in the play itself. This inspired my proposal, using the mechanics of the barn typologies as a theatrical device to reveal, or obscure views to the town outside. The audience sits in a transverse stage, facing other audience members as well as the play. A moveable lantern in the roof of the former pool hall also acts as the fly tower, moving from opening to opening between each act. The aim of the theatre was to construct spaces for the community of Mill Road, a venue where performances include the town itself."
+}

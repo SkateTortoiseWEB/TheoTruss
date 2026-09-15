@@ -8,9 +8,10 @@
  * each with its own title and canonical address, plus dist/404.html for
  * unknown addresses, and regenerates dist/sitemap.xml to list them all.
  */
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { projects } from "../src/data/projects.js";
+// Written by scripts/prepare-content.mjs, which runs just before this.
+const { projects } = JSON.parse(await readFile("src/data/content.generated.json", "utf8"));
 
 const SITE = "https://theotruss.com";
 const DIST = "dist";
@@ -67,5 +68,9 @@ const sitemap =
   pages.map((p) => `  <url>\n    <loc>${SITE}${p.route}</loc>\n  </url>\n`).join("") +
   `</urlset>\n`;
 await writeFile(path.join(DIST, "sitemap.xml"), sitemap);
+
+// The original uploads (public/images/projects) are only the source for the
+// optimised copies in img/. Don't publish them: they can be huge.
+await rm(path.join(DIST, "images", "projects"), { recursive: true, force: true });
 
 console.log(`build-pages: wrote ${pages.length} pages, 404.html and sitemap.xml`);
