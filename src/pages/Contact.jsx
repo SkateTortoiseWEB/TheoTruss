@@ -83,7 +83,7 @@ export default function Contact() {
           <div className="w-full max-w-[400px]">
             {status === "sent" ?
             <div className="border-l-2 border-[#FF0000] pl-4 text-[13px] lowercase tracking-[0.02em] text-black">
-                message sent. theo will reply shortly.
+                message sent. Theo will reply shortly.
                 <button
                 onClick={() => setStatus("idle")}
                 className="mt-4 block text-[11px] lowercase tracking-[0.06em] text-black/60 underline underline-offset-2 hover:text-black">
