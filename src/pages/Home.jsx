@@ -5,6 +5,7 @@ import PlateImage from "@/components/PlateImage";
 export default function Home() {
   return (
     <section aria-label="project gallery" className="w-full">
+      <h1 className="sr-only">Theo Truss — architecture portfolio</h1>
       <div className="columns-1 gap-3 px-6 pb-8 pt-3 sm:columns-2 md:columns-3 md:px-12 md:pb-12 lg:columns-4">
         {projects.map((p, i) => {
           return (
