@@ -1,13 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProject, projects, getDisplayDims } from "@/data/projects";
 import PlateImage from "@/components/PlateImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+// Tallest the carousel stage may be: most of the screen, leaving room for the
+// sticky header, the arrows and the slide counter.
+const stageCap = (viewportH) => Math.max(220, Math.min(viewportH - 200, 760));
+
+// Size an image to fit a box of maxW x maxH without enlarging it past its
+// natural pixel size. dims are the on-screen (post-rotation) dimensions.
+function fit(dims, maxW, maxH) {
+  if (!dims) return { w: maxW, h: maxH };
+  const scale = Math.min(1, maxW / dims.w, maxH / dims.h);
+  return { w: dims.w * scale, h: dims.h * scale };
+}
+
+// Width of an element and the viewport height, kept up to date on resize.
+function useStageSize() {
+  const ref = useRef(null);
+  const [size, setSize] = useState({ w: 0, vh: typeof window === "undefined" ? 800 : window.innerHeight });
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => setSize({ w: el.clientWidth, vh: window.innerHeight });
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  return [ref, size];
+}
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = getProject(id);
   const [slide, setSlide] = useState(0);
+  const [stageRef, stage] = useStageSize();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,6 +69,15 @@ export default function ProjectDetail() {
   const safeSlide = rest.length === 0 ? 0 : Math.min(slide, rest.length - 1);
   const current = rest[safeSlide];
   const currentDims = current ? getDisplayDims(current) : null;
+
+  // One fixed stage height for the whole carousel: the tallest slide once each
+  // is fitted to the column width and the screen-height cap. The box then stays
+  // the same size as you click through, and no slide runs off the screen.
+  const cap = stageCap(stage.vh);
+  const stageH = stage.w
+    ? Math.max(...rest.map((src) => fit(getDisplayDims(src), stage.w, cap).h))
+    : 0;
+  const slideBox = stage.w && current ? fit(currentDims, stage.w, cap) : null;
 
   return (
     <article className="w-full">
@@ -72,15 +114,18 @@ export default function ProjectDetail() {
 
             {/* carousel for the rest */}
             {current && (
-              <div className="w-full">
+              <div className="w-full" ref={stageRef}>
                 <div
-                  className="group relative mx-auto w-full"
-                  style={currentDims ? { maxWidth: `${currentDims.w}px` } : undefined}
+                  className="group relative flex w-full items-center justify-center"
+                  style={stageH ? { height: `${stageH}px` } : undefined}
                 >
-                  <PlateImage
-                    src={current}
-                    alt={`${project.title} — plate ${safeSlide + 2}`}
-                  />
+                  <div style={slideBox ? { width: `${slideBox.w}px` } : { width: "100%" }}>
+                    <PlateImage
+                      key={current}
+                      src={current}
+                      alt={`${project.title} — plate ${safeSlide + 2}`}
+                    />
+                  </div>
                   {rest.length > 1 && (
                     <>
                       <button
