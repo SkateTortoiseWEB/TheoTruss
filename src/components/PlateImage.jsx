@@ -1,9 +1,27 @@
-import { Image } from "@/components/ui/image";
 import { getDims, getRotation } from "@/data/projects";
 
+// Images live in public/images/projects and are referenced without a leading
+// slash, so BASE_URL keeps them working under a GitHub Pages sub-path.
+const resolve = (src) =>
+  /^(https?:)?\/\//.test(src) ? src : import.meta.env.BASE_URL + src.replace(/^\//, "");
+
+function Plate({ src, alt, dims, className = "" }) {
+  return (
+    <img
+      src={resolve(src)}
+      alt={alt}
+      width={dims?.w}
+      height={dims?.h}
+      loading="lazy"
+      decoding="async"
+      className={className}
+    />
+  );
+}
+
 /**
- * A portfolio plate. Wraps the base44 Image and applies the per-image rotation
- * recorded in src/data/projects.js.
+ * A portfolio plate. Applies the per-image rotation recorded in
+ * src/data/projects.js.
  *
  * For a quarter turn the rendered box swaps width and height, so the outer div
  * carries the rotated aspect ratio and the inner div is sized so that, once
@@ -15,13 +33,11 @@ export default function PlateImage({ src, alt, className = "" }) {
 
   if (rotation === 0 || rotation === 180) {
     return (
-      <Image
+      <Plate
         src={src}
         alt={alt}
-        fittingType="fill"
-        originWidth={dims?.w}
-        originHeight={dims?.h}
-        className={`w-full ${rotation === 180 ? "rotate-180" : ""} ${className}`}
+        dims={dims}
+        className={`block h-auto w-full ${rotation === 180 ? "rotate-180" : ""} ${className}`}
       />
     );
   }
@@ -40,14 +56,7 @@ export default function PlateImage({ src, alt, className = "" }) {
           transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
         }}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fittingType="fill"
-          originWidth={dims?.w}
-          originHeight={dims?.h}
-          className="w-full"
-        />
+        <Plate src={src} alt={alt} dims={dims} className="block h-auto w-full" />
       </div>
     </div>
   );

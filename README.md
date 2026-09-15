@@ -1,62 +1,37 @@
-# Base44 Project
+# Theo Truss — portfolio
 
-Use this repository to run and edit the app locally, then publish changes back through Base44.
+Static React site: Vite + Tailwind, deployed to GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `main`.
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
-
-## Prerequisites
-
-1. Clone the repository using the project's Git URL.
-2. Navigate to the project directory.
-3. Install dependencies: `npm install`.
-4. Install the Base44 CLI: `npm install -g base44@latest`.
-5. Install [Deno](https://docs.deno.com/runtime/getting_started/installation/) — the local Base44 backend runs on it.
-
-Run `base44 --help` (or see the [CLI reference](https://docs.base44.com/developers/references/cli/commands/introduction)) for the full command surface.
-
-## Run Locally
-
-Three commands, from the project root:
+## Run locally
 
 ```bash
-base44 login   # one-time per machine
-base44 link    # one-time per clone
-base44 dev     # local backend + frontend together
+npm install
+npm run dev     # http://localhost:5173
+npm run build   # production build into dist/
+npm run preview # serve dist/ locally
 ```
 
-Open the frontend URL that `base44 dev` prints (typically `http://localhost:5173`).
+## Content
 
-Notes:
+All copy and project data live in `src/data/projects.js`:
 
-- **Every fresh clone needs `base44 link`.** It writes `base44/.app.jsonc` (the app-id pointer), which is deliberately gitignored. Your app id is in the Builder URL (`app.base44.com/apps/<id>/...`); `base44 link --help` shows the non-interactive flags.
-- **`base44 dev` runs the frontend for you** (via `site.serveCommand` in this repo's `base44/config.jsonc`) — never run `npm run dev` yourself: alone it serves a UI with no backend behind it (`[base44] Proxy not enabled`, every `/api` call fails), and alongside `base44 dev` the second Vite silently takes the next port and you end up looking at the wrong one.
-- **The app must be published at least once for the UI to load under `base44 dev`.** The frontend boots by fetching app settings from the hosted app; before the first publish that fails and every page redirects to login. The local API works regardless.
-- Entities, functions, and auth run locally — entity data is **in-memory only**, wiped when `base44 dev` restarts. Everything else (Core integrations, OAuth login) is forwarded to your deployed app. Full breakdown: [Local development overview](https://docs.base44.com/developers/backend/overview/local-dev/local-development-overview).
+- `projects` — one entry per project (`id`, `title`, `year`, `location`,
+  `typology`, `cover`, `images`, `body`)
+- `cv` — the About page (statement, education, experience, awards, skills, email)
+- `imageDims` / `imageRotation` — natural pixel size and on-screen rotation for
+  each image file, keyed by filename
 
-## Frontend Only, Hosted Backend
+Images live in `public/images/projects/` and are referenced by relative path
+(`images/projects/<file>`), never with a leading slash — the site is served from
+a sub-path on GitHub Pages, so a leading slash would 404.
 
-To work on just the frontend against your app's live hosted backend:
+To add a project: drop the images in `public/images/projects/`, add their
+dimensions to `imageDims`, and add the project object to `projects`.
 
-```bash
-base44 dev --remote
-```
+## Notes
 
-⚠️ In this mode writes go to your app's **production data** — plain `base44 dev` keeps everything local.
-
-## Publish Your Changes
-
-After pushing your changes to git, open the Base44 dashboard and publish the app:
-
-```bash
-base44 dashboard open
-```
-
-This repo syncs to Base44 through git, so publish from the dashboard rather than `base44 deploy` — a CLI deploy ships your local tree directly, bypassing the sync, and the deployed state silently diverges from the repo.
-
-## Docs & Support
-
-GitHub integration: [https://docs.base44.com/developers/app-code/local-development/github](https://docs.base44.com/developers/app-code/local-development/github)
-
-Local development: [https://docs.base44.com/developers/backend/overview/local-dev/local-development-overview](https://docs.base44.com/developers/backend/overview/local-dev/local-development-overview)
-
-Support: [https://app.base44.com/support](https://app.base44.com/support)
+- Routing is `HashRouter`, so URLs look like `/#/project/accretion`. That is what
+  makes deep links work on GitHub Pages without a custom 404 fallback.
+- The contact form posts to Web3Forms. The access key in `src/pages/Contact.jsx`
+  is public by design — it identifies the destination inbox, not an account.
