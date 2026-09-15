@@ -45,7 +45,7 @@ export default function Contact() {
       setForm({ name: "", company: "", email: "", message: "" });
     } catch (err) {
       setStatus("error");
-      setError("message could not be sent. please email theo directly.");
+      setError("message could not be sent. please email Theo directly.");
     }
   };
 
