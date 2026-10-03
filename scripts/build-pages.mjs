@@ -109,6 +109,11 @@ const pages = [
     title: `Contact — ${NAME}`,
     graph: [page("/contact/", "ContactPage", { name: `Contact — ${NAME}` }), crumbs("Contact", "/contact/")],
   },
+  {
+    route: "/privacy/",
+    title: `Privacy — ${NAME}`,
+    graph: [page("/privacy/", "WebPage", { name: `Privacy — ${NAME}` }), crumbs("Privacy", "/privacy/")],
+  },
   ...projects.map((p) => ({
     route: `/project/${p.id}/`,
     title: `${p.title} — ${NAME}`,

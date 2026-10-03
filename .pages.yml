@@ -136,3 +136,26 @@ content:
         label: Skills
         type: string
         list: true
+
+  - name: privacy
+    label: Privacy page
+    type: file
+    path: content/privacy.json
+    format: json
+    fields:
+      - name: updated
+        label: Last updated
+        type: string
+        description: "For example: October 2026. Change this whenever you edit the text below."
+      - name: sections
+        label: Sections
+        type: object
+        list: true
+        fields:
+          - name: heading
+            label: Heading
+            type: string
+          - name: text
+            label: Text
+            type: text
+            description: Leave an empty line between paragraphs.

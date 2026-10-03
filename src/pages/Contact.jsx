@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import { cv } from "@/data/projects";
 
@@ -156,6 +157,15 @@ export default function Contact() {
                 
                   {status === "sending" ? "sending" : "send message"}
                 </button>
+              <p className="mt-6 text-[11px] lowercase tracking-[0.04em] text-black/60">
+                your name, email and message are used only to reply to you — see the{" "}
+                <Link
+                  to="/privacy/"
+                  className="underline underline-offset-2 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2"
+                >
+                  privacy notice
+                </Link>
+              </p>
               </form>
             }
           </div>

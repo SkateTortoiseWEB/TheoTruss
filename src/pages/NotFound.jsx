@@ -5,7 +5,7 @@ export default function NotFound() {
     <section className="w-full">
       <div className="px-6 py-24 md:px-12">
         <div className="flex max-w-[400px] flex-col gap-6">
-          <div className="flex items-baseline gap-3 text-[11px] lowercase tracking-[0.06em] text-black/50">
+          <div className="flex items-baseline gap-3 text-[11px] lowercase tracking-[0.06em] text-black/60">
             <span>404</span>
             <span className="h-px flex-1 bg-black/20" aria-hidden="true" />
           </div>

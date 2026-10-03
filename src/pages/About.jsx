@@ -4,7 +4,7 @@ function Section({ label, children }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-baseline gap-3">
-        <span className="text-[10px] lowercase tracking-[0.14em] text-black/50">{label}</span>
+        <span className="text-[10px] lowercase tracking-[0.14em] text-black/60">{label}</span>
         <span className="h-px flex-1 bg-black/15" aria-hidden="true" />
       </div>
       <div className="flex flex-col gap-2">{children}</div>
@@ -43,7 +43,7 @@ export default function About() {
               {cv.education.map((e, i) => (
                 <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
                   <span className="text-black">{e.title}</span>
-                  <span className="text-right text-black/50">{e.place} — {e.years}</span>
+                  <span className="text-right text-black/60">{e.place} — {e.years}</span>
                 </div>
               ))}
             </Section>
@@ -52,7 +52,7 @@ export default function About() {
               {cv.experience.map((e, i) => (
                 <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
                   <span className="text-black">{e.role}</span>
-                  <span className="text-right text-black/50">{e.place} — {e.years}</span>
+                  <span className="text-right text-black/60">{e.place} — {e.years}</span>
                 </div>
               ))}
             </Section>
@@ -61,7 +61,7 @@ export default function About() {
               {cv.awards.map((a, i) => (
                 <div key={i} className="flex items-baseline justify-between gap-4 text-[13px] tracking-[-0.01em]">
                   <span className="text-black">{a.title}</span>
-                  <span className="shrink-0 text-right text-black/50">{a.years}</span>
+                  <span className="shrink-0 text-right text-black/60">{a.years}</span>
                 </div>
               ))}
             </Section>

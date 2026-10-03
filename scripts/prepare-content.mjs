@@ -6,6 +6,7 @@
  * saves plain files into this repo:
  *   content/projects/<project>.json   one file per project
  *   content/about.json                the About / Contact details
+ *   content/privacy.json              the Privacy page
  *   public/images/projects/...        uploaded images, any size, jpg/png/webp
  *
  * This script turns those into what the site actually uses:
@@ -26,6 +27,7 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const PROJECTS_DIR = path.join(ROOT, "content/projects");
 const ABOUT_FILE = path.join(ROOT, "content/about.json");
+const PRIVACY_FILE = path.join(ROOT, "content/privacy.json");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const OUT_DIR = path.join(PUBLIC_DIR, "img");
 const OUT_JSON = path.join(ROOT, "src/data/content.generated.json");
@@ -190,9 +192,20 @@ async function loadAbout() {
   };
 }
 
+async function loadPrivacy() {
+  const d = (await readJson(PRIVACY_FILE)) || {};
+  return {
+    updated: text(d.updated),
+    sections: (Array.isArray(d.sections) ? d.sections : [])
+      .map((s) => ({ heading: text(s?.heading), body: paragraphs(s?.text) }))
+      .filter((s) => s.heading || s.body.length),
+  };
+}
+
 await mkdir(OUT_DIR, { recursive: true });
 const projects = await loadProjects();
 const about = await loadAbout();
+const privacy = await loadPrivacy();
 
 // Remove optimised images that nothing uses any more.
 for (const f of await readdir(OUT_DIR)) {
@@ -200,7 +213,7 @@ for (const f of await readdir(OUT_DIR)) {
 }
 
 await mkdir(path.dirname(OUT_JSON), { recursive: true });
-await writeFile(OUT_JSON, JSON.stringify({ projects, about }, null, 2) + "\n");
+await writeFile(OUT_JSON, JSON.stringify({ projects, about, privacy }, null, 2) + "\n");
 
 const imageCount = projects.reduce((n, p) => n + p.images.length, 0);
 console.log(

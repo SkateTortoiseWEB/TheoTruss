@@ -11,6 +11,8 @@ export const projects = content.projects.map((p) => ({
 
 export const cv = content.about;
 
+export const privacy = content.privacy;
+
 // On-screen pixel size of each image, keyed by its path.
 const imageDims = new Map(
   content.projects.flatMap((p) => p.images.map((img) => [img.src, { w: img.w, h: img.h }])),

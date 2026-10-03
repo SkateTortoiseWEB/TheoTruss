@@ -150,7 +150,7 @@ export default function ProjectDetail() {
                   )}
                 </div>
                 {rest.length > 1 && (
-                  <div className="mt-2 text-center text-[11px] lowercase tracking-[0.1em] text-black/40">
+                  <div className="mt-2 text-center text-[11px] lowercase tracking-[0.1em] text-black/60">
                     {safeSlide + 1} / {rest.length}
                   </div>
                 )}
@@ -162,7 +162,7 @@ export default function ProjectDetail() {
         {/* right: text */}
         <div className="md:w-1/2">
           <div className="px-6 py-10 md:mx-auto md:max-w-[440px] md:px-0 md:py-16">
-            <div className="mb-8 flex items-baseline gap-3 text-[12px] lowercase tracking-[0.06em] text-black/50">
+            <div className="mb-8 flex items-baseline gap-3 text-[12px] lowercase tracking-[0.06em] text-black/60">
               <span>{String(index + 1).padStart(2, "0")}</span>
               <span className="h-px flex-1 bg-black/20" aria-hidden="true" />
               <span>{project.year}</span>
