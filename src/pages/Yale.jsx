@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Download, Globe } from "lucide-react";
 
-const FILE = "/yale/TheoTruss_Bass_Yale.pdf";
+const FILE = "/89630879975560535957978716155090/TheoTruss_Bass_Yale.pdf";
 
-const linkClass =
-  "inline-flex items-baseline gap-2 text-[11px] lowercase tracking-[0.06em] text-black/60 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CC0000] focus-visible:ring-offset-2";
+const buttonClass =
+  "inline-flex w-full items-center gap-4 border border-black px-6 py-5 text-[16px] font-semibold tracking-[0.02em] text-black transition-colors hover:bg-black hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CC0000] focus-visible:ring-offset-2 sm:w-auto";
 
 export default function Yale() {
   // Unlisted page: keep it out of search results (the prerendered HTML carries
@@ -28,14 +29,14 @@ export default function Yale() {
             </p>
           </div>
 
-          <div className="flex flex-col items-start gap-4">
-            <a href={FILE} download className={linkClass}>
-              <span>download application (pdf)</span>
-              <span className="h-px w-6 bg-black/40" aria-hidden="true" />
+          <div className="flex flex-col items-stretch gap-4 sm:items-start">
+            <a href={FILE} download className={buttonClass}>
+              <Download className="h-6 w-6 shrink-0" aria-hidden="true" />
+              <span>Download application (PDF)</span>
             </a>
-            <Link to="/" className={linkClass}>
-              <span>view the full portfolio site</span>
-              <span className="h-px w-6 bg-black/40" aria-hidden="true" />
+            <Link to="/" className={buttonClass}>
+              <Globe className="h-6 w-6 shrink-0" aria-hidden="true" />
+              <span>View the full portfolio site</span>
             </Link>
           </div>
         </div>
