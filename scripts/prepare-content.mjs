@@ -27,6 +27,7 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const PROJECTS_DIR = path.join(ROOT, "content/projects");
 const ABOUT_FILE = path.join(ROOT, "content/about.json");
+const ORDER_FILE = path.join(ROOT, "content/gallery-order.json");
 const PRIVACY_FILE = path.join(ROOT, "content/privacy.json");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const OUT_DIR = path.join(PUBLIC_DIR, "img");
@@ -128,7 +129,22 @@ async function processImage(entry, where) {
   }
 }
 
+/**
+ * The gallery order from content/gallery-order.json: a list the editor drags
+ * into place in Pages CMS. Entries are project file paths, file names or
+ * titles; they are all reduced to the project's id (its file name). Projects
+ * missing from the list go after the listed ones, by their position number.
+ */
+async function loadGalleryOrder() {
+  const data = await readJson(ORDER_FILE);
+  const list = Array.isArray(data?.order) ? data.order : [];
+  return list
+    .map((e) => (typeof e === "string" ? e : text(e?.path ?? e?.value ?? e?.title)))
+    .map((e) => slugify(path.parse(text(e)).name || text(e)));
+}
+
 async function loadProjects() {
+  const order = await loadGalleryOrder();
   let files = [];
   try {
     files = (await readdir(PROJECTS_DIR)).filter((f) => f.endsWith(".json")).sort();
@@ -168,7 +184,16 @@ async function loadProjects() {
     });
   }
 
-  projects.sort((a, b) => a.position - b.position || a.title.localeCompare(b.title));
+  const rank = (p) => {
+    const i = order.indexOf(slugify(p.id));
+    return i === -1 ? Infinity : i;
+  };
+  projects.sort(
+    (a, b) =>
+      (rank(a) === rank(b) ? 0 : rank(a) < rank(b) ? -1 : 1) ||
+      a.position - b.position ||
+      a.title.localeCompare(b.title),
+  );
   return projects.map(({ position, ...p }) => p);
 }
 

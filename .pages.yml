@@ -28,10 +28,9 @@ content:
         required: true
         description: Also used for the page address, e.g. "Test Pavilion" becomes theotruss.com/project/test-pavilion. Changing the title later does not change the address.
       - name: position
-        label: Position on the gallery
+        label: Position on the gallery (optional)
         type: number
-        required: true
-        description: "1 appears first. Existing projects use 1, 2, 3, 4, 5, so use 6 for a new project at the end, or 0 to put it before everything."
+        description: "Not needed any more: drag projects into place in Gallery order. A project missing from that list goes after the listed ones, lowest number first."
       - name: year
         label: Year
         type: string
@@ -75,6 +74,22 @@ content:
         label: Description
         type: text
         description: Leave an empty line between paragraphs.
+
+  - name: gallery-order
+    label: Gallery order
+    type: file
+    path: content/gallery-order.json
+    format: json
+    fields:
+      - name: order
+        label: Projects, in the order they appear on the homepage
+        type: reference
+        list: true
+        description: Drag to reorder; the top one appears first. Add new projects here once they are created.
+        options:
+          collection: projects
+          value: "{path}"
+          label: "{primary}"
 
   - name: about
     label: About and contact
