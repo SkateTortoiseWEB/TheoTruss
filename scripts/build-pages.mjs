@@ -126,7 +126,7 @@ const pages = [
 const unlisted = [
   {
     route: "/89630879975560535957978716155090/",
-    title: `${NAME} — Application`,
+    title: `${NAME} — Portfolio`,
     graph: [],
   },
 ];
