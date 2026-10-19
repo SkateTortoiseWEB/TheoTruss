@@ -23,10 +23,9 @@ export default function Yale() {
       <div className="px-6 py-10 md:px-12 md:py-16">
         <div className="flex max-w-[620px] flex-col gap-8">
           <div className="flex flex-col gap-3">
-            <h1 className="text-[18px] font-semibold tracking-[0.02em]">Application for Yale</h1>
-            <p className="text-[16px] leading-[1.6] tracking-[-0.01em] text-black">
+            <h1 className="text-[16px] leading-[1.6] tracking-[-0.01em] text-black">
               Theo Truss &mdash; application portfolio (PDF, 20 pages, 22&nbsp;MB).
-            </p>
+            </h1>
           </div>
 
           <div className="flex flex-col items-stretch gap-4 sm:items-start">
