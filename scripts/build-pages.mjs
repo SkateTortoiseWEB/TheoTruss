@@ -121,6 +121,16 @@ const pages = [
   })),
 ];
 
+// Reachable only by link: built like the others but marked noindex and left
+// out of the sitemap.
+const unlisted = [
+  {
+    route: "/yale-application/",
+    title: `Application for Yale — ${NAME}`,
+    graph: [],
+  },
+];
+
 const escape = (s) =>
   s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
@@ -147,10 +157,13 @@ function render({ route, title, graph }) {
   ]) {
     if (!re.test(html)) throw new Error(`build-pages: index.html is missing ${label}`);
   }
+  if (unlisted.some((u) => u.route === route)) {
+    html = html.replace("</head>", '    <meta name="robots" content="noindex, nofollow" />\n  </head>');
+  }
   return html;
 }
 
-for (const page of pages) {
+for (const page of [...pages, ...unlisted]) {
   const file = path.join(DIST, page.route, "index.html");
   await mkdir(path.dirname(file), { recursive: true });
   await writeFile(file, render(page));
@@ -174,4 +187,4 @@ await writeFile(path.join(DIST, "sitemap.xml"), sitemap);
 // optimised copies in img/. Don't publish them: they can be huge.
 await rm(path.join(DIST, "images", "projects"), { recursive: true, force: true });
 
-console.log(`build-pages: wrote ${pages.length} pages, 404.html and sitemap.xml`);
+console.log(`build-pages: wrote ${pages.length + unlisted.length} pages, 404.html and sitemap.xml`);
