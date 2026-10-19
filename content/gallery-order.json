@@ -1,11 +1,11 @@
 {
   "order": [
     "content/projects/accretion.json",
-    "content/projects/reflection.json",
+    "content/projects/frames.json",
     "content/projects/artefacts.json",
+    "content/projects/reflection.json",
     "content/projects/novigo.json",
     "content/projects/barn-cottage.json",
-    "content/projects/frames.json",
     "content/projects/scotland-2024.json",
     "content/projects/between-heaven-and-earth.json",
     "content/projects/a-stage-backstage.json"
