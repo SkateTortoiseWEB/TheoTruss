@@ -7,6 +7,15 @@
     {
       "image": "/images/projects/theopainting2.jpg",
       "turn": "none"
+    },
+    {
+      "image": "/images/projects/img5677.jpg",
+      "turn": "none"
+    },
+    {
+      "image": "/images/projects/img5672.jpg",
+      "turn": "none"
     }
-  ]
+  ],
+  "description": "An ongoing study of Barn Cottage."
 }
