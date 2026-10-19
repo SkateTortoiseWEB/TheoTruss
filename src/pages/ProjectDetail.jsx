@@ -227,16 +227,13 @@ export default function ProjectDetail() {
                 </>
               )}
             </div>
-            {!carouselRight && nextLink}
-          </div>
-          {carouselRight && (
-            <>
-              <div className="pb-4">{carousel}</div>
-              <div className="px-6 pb-10 md:mx-auto md:max-w-[440px] md:px-0">
-                {nextLink}
+            {carouselRight && carousel && (
+              <div className={project.body.length > 0 ? "mt-10" : undefined}>
+                {carousel}
               </div>
-            </>
-          )}
+            )}
+            {nextLink}
+          </div>
         </div>
       </div>
     </article>
