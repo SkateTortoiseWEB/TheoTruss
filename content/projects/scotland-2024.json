@@ -1,0 +1,17 @@
+{
+  "title": "Scotland, 2024",
+  "position": 8,
+  "year": "2024",
+  "location": "Scotland ",
+  "images": [
+    {
+      "image": "/images/projects/eribollp.jpg",
+      "turn": "none"
+    },
+    {
+      "image": "/images/projects/duncansbyp.jpg",
+      "turn": "none"
+    }
+  ],
+  "description": "Paintings from the Scottish Highlands."
+}
