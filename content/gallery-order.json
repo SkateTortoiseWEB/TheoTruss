@@ -2,8 +2,8 @@
   "order": [
     "content/projects/accretion.json",
     "content/projects/frames.json",
-    "content/projects/artefacts.json",
     "content/projects/reflection.json",
+    "content/projects/artefacts.json",
     "content/projects/novigo.json",
     "content/projects/barn-cottage.json",
     "content/projects/scotland-2024.json",
