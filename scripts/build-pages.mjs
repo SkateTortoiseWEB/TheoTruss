@@ -125,8 +125,8 @@ const pages = [
 // out of the sitemap.
 const unlisted = [
   {
-    route: "/yale-application/",
-    title: `Application for Yale — ${NAME}`,
+    route: "/89630879975560535957978716155090/",
+    title: `${NAME} — Application`,
     graph: [],
   },
 ];

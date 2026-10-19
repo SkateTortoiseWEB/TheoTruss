@@ -20,7 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/yale-application" element={<Yale />} />
+          <Route path="/89630879975560535957978716155090" element={<Yale />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
