@@ -36,11 +36,40 @@ function useStageSize() {
   return [ref, size];
 }
 
+// True on wide screens when the description column is shorter than the main
+// photo, which would leave the right half empty below the text.
+const TEXT_PAD = 64 + 80; // top padding of the text column + room for "next"
+function useTextShorterThanPhoto() {
+  const photoRef = useRef(null);
+  const textRef = useRef(null);
+  const [shorter, setShorter] = useState(false);
+  useLayoutEffect(() => {
+    const photo = photoRef.current;
+    if (!photo) return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => {
+      const textH = textRef.current ? textRef.current.offsetHeight : 0;
+      setShorter(mq.matches && textH + TEXT_PAD < photo.offsetHeight);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(photo);
+    if (textRef.current) ro.observe(textRef.current);
+    mq.addEventListener("change", update);
+    return () => {
+      ro.disconnect();
+      mq.removeEventListener("change", update);
+    };
+  });
+  return [photoRef, textRef, shorter];
+}
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = getProject(id);
   const [slide, setSlide] = useState(0);
   const [stageRef, stage] = useStageSize();
+  const [photoRef, textRef, textShort] = useTextShorterThanPhoto();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,6 +108,81 @@ export default function ProjectDetail() {
     : 0;
   const slideBox = stage.w && current ? fit(currentDims, stage.w, cap) : null;
 
+  // When the description is shorter than the main photo, the carousel moves to
+  // the right half, under the text, so that side isn't left empty.
+  const carouselRight = textShort;
+
+  const mainPhoto = (
+    <div className="w-full" ref={photoRef}>
+      <div
+        className="mx-auto w-full"
+        style={mainDims ? { maxWidth: `${mainDims.w}px` } : undefined}
+      >
+        <PlateImage
+          src={main}
+          alt={`${project.title} — plate 1`}
+        />
+      </div>
+    </div>
+  );
+
+  const carousel = current && (
+    <div className="w-full" ref={stageRef}>
+      <div
+        className="group relative flex w-full items-center justify-center"
+        style={stageH ? { height: `${stageH}px` } : undefined}
+      >
+        <div style={slideBox ? { width: `${slideBox.w}px` } : { width: "100%" }}>
+          <PlateImage
+            key={current}
+            src={current}
+            alt={`${project.title} — plate ${safeSlide + 2}`}
+          />
+        </div>
+        {rest.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() =>
+                setSlide((s) => (s - 1 + rest.length) % rest.length)
+              }
+              aria-label="previous image"
+              className="absolute left-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setSlide((s) => (s + 1) % rest.length)}
+              aria-label="next image"
+              className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </>
+        )}
+      </div>
+      {rest.length > 1 && (
+        <div className="mt-2 text-center text-[11px] lowercase tracking-[0.1em] text-black/60">
+          {safeSlide + 1} / {rest.length}
+        </div>
+      )}
+    </div>
+  );
+
+  const nextLink = (
+    <div className="mt-10 border-t border-black pt-4">
+      <Link
+        to={`/project/${next.id}/`}
+        className="inline-flex items-baseline gap-2 text-[12px] tracking-[0.06em] text-black/60 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2"
+      >
+        <span>next</span>
+        <span className="h-px w-6 bg-black/40" aria-hidden="true" />
+        <span>{next.title}</span>
+      </Link>
+    </div>
+  );
+
   return (
     <article className="w-full">
       {/* meta line */}
@@ -99,91 +203,40 @@ export default function ProjectDetail() {
         {/* left: images */}
         <div className="md:w-1/2 md:sticky md:top-[73px] md:self-start">
           <div className="flex flex-col gap-4">
-            {/* main photo */}
-            <div className="w-full">
-              <div
-                className="mx-auto w-full"
-                style={mainDims ? { maxWidth: `${mainDims.w}px` } : undefined}
-              >
-                <PlateImage
-                  src={main}
-                  alt={`${project.title} — plate 1`}
-                />
-              </div>
-            </div>
-
-            {/* carousel for the rest */}
-            {current && (
-              <div className="w-full" ref={stageRef}>
-                <div
-                  className="group relative flex w-full items-center justify-center"
-                  style={stageH ? { height: `${stageH}px` } : undefined}
-                >
-                  <div style={slideBox ? { width: `${slideBox.w}px` } : { width: "100%" }}>
-                    <PlateImage
-                      key={current}
-                      src={current}
-                      alt={`${project.title} — plate ${safeSlide + 2}`}
-                    />
-                  </div>
-                  {rest.length > 1 && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSlide((s) => (s - 1 + rest.length) % rest.length)
-                        }
-                        aria-label="previous image"
-                        className="absolute left-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
-                      >
-                        <ChevronLeft className="h-5 w-5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSlide((s) => (s + 1) % rest.length)}
-                        aria-label="next image"
-                        className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-sm ring-1 ring-black/15 opacity-100 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000]"
-                      >
-                        <ChevronRight className="h-5 w-5" />
-                      </button>
-                    </>
-                  )}
-                </div>
-                {rest.length > 1 && (
-                  <div className="mt-2 text-center text-[11px] lowercase tracking-[0.1em] text-black/60">
-                    {safeSlide + 1} / {rest.length}
-                  </div>
-                )}
-              </div>
-            )}
+            {mainPhoto}
+            {!carouselRight && carousel}
           </div>
         </div>
 
-        {/* right: text */}
+        {/* right: text, then the carousel when the text is short */}
         <div className="md:w-1/2">
           <div className="px-6 py-10 md:mx-auto md:max-w-[440px] md:px-0 md:py-16">
-            <div className="mb-8 flex items-baseline gap-3 text-[12px] lowercase tracking-[0.06em] text-black/60">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <span className="h-px flex-1 bg-black/20" aria-hidden="true" />
-              <span>{project.year}</span>
+            <div ref={textRef}>
+              {project.body.length > 0 && (
+                <>
+                  <div className="mb-8 flex items-baseline gap-3 text-[12px] lowercase tracking-[0.06em] text-black/60">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span className="h-px flex-1 bg-black/20" aria-hidden="true" />
+                    <span>{project.year}</span>
+                  </div>
+                  <div className="flex flex-col gap-5 text-[16px] leading-[1.6] tracking-[-0.01em] text-black">
+                    {project.body.map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
-            <div className="flex flex-col gap-5 text-[16px] leading-[1.6] tracking-[-0.01em] text-black">
-              {project.body.map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
-
-            <div className="mt-10 border-t border-black pt-4">
-              <Link
-                to={`/project/${next.id}/`}
-                className="inline-flex items-baseline gap-2 text-[12px] tracking-[0.06em] text-black/60 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF0000] focus-visible:ring-offset-2"
-              >
-                <span>next</span>
-                <span className="h-px w-6 bg-black/40" aria-hidden="true" />
-                <span>{next.title}</span>
-              </Link>
-            </div>
+            {!carouselRight && nextLink}
           </div>
+          {carouselRight && (
+            <>
+              <div className="pb-4">{carousel}</div>
+              <div className="px-6 pb-10 md:mx-auto md:max-w-[440px] md:px-0">
+                {nextLink}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </article>
